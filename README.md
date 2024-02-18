@@ -1,4 +1,6 @@
 # Klasifikasi-Berita-Hoax-Indonesia-LSTM
+
+Klasifikasi berita hoax bahasa Indonesia ini menggunakan Python dan TensorFlow dengan metode LSTM. Interface menggunakan Tkinter.
 Klasifikasi berita hoax Bahasa Indonesia dengan Metode LSTM dengan dataset dari kaggle.com : https://www.kaggle.com/datasets/linkgish/indonesian-fact-and-hoax-political-news 
 
 Menggunakan Pre Trained Word2Vec dari kaggle.com : https://www.kaggle.com/datasets/greegtitan/indonesia-word2vec-embbeding
@@ -20,3 +22,5 @@ Library yang digunakan :
 |     seaborn   |      0.13.0   |
 |   tensorflow  |      2.13.0   |
 |    wordcloud  |      1.9.2    |
+
+
