@@ -551,7 +551,7 @@ df_result.to_csv('df_result_model3.csv', index=False)  # Gantilah dengan nama fi
 
 from keras.models import load_model
 
-model_load = load_model('model_lstm6.h5')
+model_load = load_model('model_lstm3.h5')
 model.summary()
 
 # Example usage
