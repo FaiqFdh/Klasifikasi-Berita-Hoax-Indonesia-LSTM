@@ -6,7 +6,7 @@ Menggunakan Pre Trained Word2Vec dari kaggle.com : https://www.kaggle.com/datase
 Library yang digunakan :
 
 | Library Name  |    Version    |
-| ------------- | ------------- |
+| :---          |    :---:      |
 |     Keras     |     2.13.1    |  
 |   Matplotlib  |     3.8.0     |
 |     nltk      |     3.8.1     |  
