@@ -4,9 +4,8 @@ Klasifikasi berita hoax Bahasa Indonesia dengan Metode LSTM dengan dataset dari 
 Menggunakan Pre Trained Word2Vec dari kaggle.com : https://www.kaggle.com/datasets/greegtitan/indonesia-word2vec-embbeding
 
 Library yang digunakan :
-Library Name                 Version
-* keras                        2.13.1
-* matplotlib                   3.8.0
+* keras                       * 2.13.1
+* matplotlib                  * 3.8.0
 * nltk                         3.8.1
 * numpy                        1.24.3
 * pandas                       2.1.4
