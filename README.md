@@ -23,4 +23,8 @@ Library yang digunakan :
 |   tensorflow  |      2.13.0   |
 |    wordcloud  |      1.9.2    |
 
+User Guide
+1. Input Judul Berita. Langkah pertama yaitu pengguna diminta untuk memasukkan judul berita yang ingin diprediksi ke dalam kolom yang disediakan.
+2. Klik Tombol Prediksi. Setelah memasukkan judul berita, langkah selanjutnya adalah mengklik tombol "Prediksi" yang tersedia. Tombol ini akan memulai proses prediksi berdasarkan model klasifikasi berita hoax.
+3. Hasil prediksi akan keluar. Setelah proses prediksi selesai, hasilnya akan ditampilkan pada layar. Pengguna dapat melihat apakah berita tersebut diprediksi sebagai "hoax" atau "non-hoax".
 
