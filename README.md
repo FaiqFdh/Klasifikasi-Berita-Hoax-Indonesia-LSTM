@@ -23,7 +23,7 @@ Library yang digunakan :
 |   tensorflow  |      2.13.0   |
 |    wordcloud  |      1.9.2    |
 
-User Guide
+# User Guide
 1. Input Judul Berita. Langkah pertama yaitu pengguna diminta untuk memasukkan judul berita yang ingin diprediksi ke dalam kolom yang disediakan.
    * ![Octocat](https://github.com/FaiqFdh/Klasifikasi-Berita-Hoax-Indonesia-LSTM/blob/main/Klasifikasi%20Berita%20Hoax%20Bahasa%20Indonesia%20Word2Vec/Pictures/Screenshot%20(485).png "Github logo") 
 2. Klik Tombol Prediksi. Setelah memasukkan judul berita, langkah selanjutnya adalah mengklik tombol "Prediksi" yang tersedia. Tombol ini akan memulai proses prediksi berdasarkan model klasifikasi berita hoax.
