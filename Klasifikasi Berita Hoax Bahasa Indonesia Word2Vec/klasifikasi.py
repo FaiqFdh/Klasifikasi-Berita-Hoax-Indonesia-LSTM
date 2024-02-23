@@ -183,17 +183,29 @@ print(y_train)
 
 print(y_test)
 
-# Membuat DataFrame
+# Membuat DataFrame Data Training
+df_train = pd.DataFrame({
+    'Text': x_train,
+    'True_Label': y_train,
+})
+
+# Reset index
+#df_train = df_train.reset_index(drop=True)
+
+# Menyimpan DataFrame yang sudah diperbarui
+df_train.to_csv('df_data_train.csv', index=False)
+
+# Membuat DataFrame Data Test
 df_result = pd.DataFrame({
-    'Text': x_test,  # Gantilah dengan nama kolom sesuai dengan data yang ada pada X_test
-    'True_Label': y_test,  # Gantilah dengan nama kolom sesuai dengan data yang ada pada y_test
+    'Text': x_test,
+    'True_Label': y_test,
 })
 
 # Reset index
 #df_result = df_result.reset_index(drop=True)
 
 # Menyimpan DataFrame yang sudah diperbarui
-df_result.to_csv('df_data_test.csv', index=False)  # Gantilah dengan nama file dan path yang sesuai
+df_result.to_csv('df_data_test.csv', index=False)
 
 print(df_result)
 
@@ -406,7 +418,7 @@ for sentence, prediction in zip(input_sentences, predictions):
 """### Model 3"""
 
 #epochs = 5
-#embed_size = 100
+#embed_size = 50
 hidden_layer_size = 64
 batch_size = 64
 optimizer = 'Adam'
@@ -435,7 +447,7 @@ for sentence, prediction in zip(input_sentences, predictions):
 """### Model 4"""
 
 #epochs = 5
-#embed_size = 100
+#embed_size = 50
 hidden_layer_size = 64
 batch_size = 32
 optimizer = 'Adam'
@@ -464,7 +476,7 @@ for sentence, prediction in zip(input_sentences, predictions):
 """### Model 5"""
 
 epochs = 5
-#embed_size = 100
+#embed_size = 50
 hidden_layer_size = 64
 batch_size = 32
 optimizer = 'Adam'
@@ -493,7 +505,7 @@ for sentence, prediction in zip(input_sentences, predictions):
 """### Model 6"""
 
 #epochs = 5
-#embed_size = 100
+#embed_size = 50
 hidden_layer_size = 64
 batch_size = 32
 optimizer = 'Adam'
@@ -520,9 +532,6 @@ for sentence, prediction in zip(input_sentences, predictions):
     print(f"Sentence: {sentence}\nPrediction: {'Hoax' if prediction[0] == 1 else 'Real'}\n")
 
 ## TEST KODE LABEL PREDICT == REAL
-# Misalkan Anda sudah mempunyai DataFrame df_result
-# df_result = ...
-
 # Misalnya, sentences adalah kolom 'text' pada DataFrame
 sentences = df_result['Text']
 
