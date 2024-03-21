@@ -83,6 +83,7 @@ print(hoax_df[hoax_df['Title'].str.contains(r'\[SALAH\]', regex=True)])
 """## Kombinasi Fact and Hoax"""
 
 news_df = pd.concat([fact_df.iloc[:], hoax_df.iloc[:]], axis=0, ignore_index=True)
+#news_df.to_csv('news_df.csv', index=False)
 #news_df = pd.concat([fact_df.iloc[:], fact_df1.iloc[:],hoax_df.iloc[:],], axis=0, ignore_index=True)
 
 print(news_df)
@@ -99,7 +100,7 @@ colors = ['blue', 'orange']
 plt.bar(hoax_count.index, hoax_count.values, color=colors)
 #plt.xlabel('Hoax')
 plt.ylabel('Jumlah')
-plt.xticks([0, 1], ['Tidak Hoax', 'Hoax'])
+plt.xticks([0, 1], ['Real', 'Hoax'])
 plt.title('Distribusi Data Berita per Kategori')
 plt.show()
 
@@ -124,27 +125,27 @@ news_df = preprocessing(news_df)
 print(news_df)
 
 # Mengecek keberadaan karakter "”", "″", "‘", "’", dan emotikon di dalam kolom "title"
-for character in ["”", "″", "‘", "’"]:
-    contains_character = news_df['Title'].str.contains(character)
-    print(f"Contains '{character}':\n{news_df[contains_character]}")
+# for character in ["”", "″", "‘", "’"]:
+#     contains_character = news_df['Title'].str.contains(character)
+#     print(f"Contains '{character}':\n{news_df[contains_character]}")
 
 # Mengecek keberadaan emotikon di dalam kolom "title"
-emoticon_pattern = "["
-emoticon_pattern += u"\U0001F600-\U0001F64F"  # Emotikon umum
-emoticon_pattern += u"\U0001F300-\U0001F5FF"  # Simbol & peta
-emoticon_pattern += u"\U0001F680-\U0001F6FF"  # Transportasi & simbol umum
-emoticon_pattern += u"\U0001F700-\U0001F77F"  # Alat & simbol teknis
-emoticon_pattern += u"\U0001F780-\U0001F7FF"  # Alat & seni
-emoticon_pattern += u"\U0001F800-\U0001F8FF"  # Variasi warna
-emoticon_pattern += u"\U0001F900-\U0001F9FF"  # Emoji & simbol tambahan
-emoticon_pattern += u"\U0001FA00-\U0001FA6F"  # Emoji & simbol tambahan
-emoticon_pattern += u"\U0001FA70-\U0001FAFF"  # Emoji & simbol tambahan
-emoticon_pattern += u"\U00002702-\U000027B0"  # Emoji & simbol tambahan
-emoticon_pattern += u"\U000024C2-\U0001F251"
-emoticon_pattern += "]+"
-
-contains_emoticon = news_df['Title'].str.contains(emoticon_pattern, flags=re.UNICODE)
-print(f"Contains emoticon:\n{news_df[contains_emoticon]}")
+# emoticon_pattern = "["
+# emoticon_pattern += u"\U0001F600-\U0001F64F"  # Emotikon umum
+# emoticon_pattern += u"\U0001F300-\U0001F5FF"  # Simbol & peta
+# emoticon_pattern += u"\U0001F680-\U0001F6FF"  # Transportasi & simbol umum
+# emoticon_pattern += u"\U0001F700-\U0001F77F"  # Alat & simbol teknis
+# emoticon_pattern += u"\U0001F780-\U0001F7FF"  # Alat & seni
+# emoticon_pattern += u"\U0001F800-\U0001F8FF"  # Variasi warna
+# emoticon_pattern += u"\U0001F900-\U0001F9FF"  # Emoji & simbol tambahan
+# emoticon_pattern += u"\U0001FA00-\U0001FA6F"  # Emoji & simbol tambahan
+# emoticon_pattern += u"\U0001FA70-\U0001FAFF"  # Emoji & simbol tambahan
+# emoticon_pattern += u"\U00002702-\U000027B0"  # Emoji & simbol tambahan
+# emoticon_pattern += u"\U000024C2-\U0001F251"
+# emoticon_pattern += "]+"
+#
+# contains_emoticon = news_df['Title'].str.contains(emoticon_pattern, flags=re.UNICODE)
+# print(f"Contains emoticon:\n{news_df[contains_emoticon]}")
 
 """## WordCloud Real , RUN SETELAH REMOVE STOPWORD"""
 
@@ -182,6 +183,9 @@ print(x_test)
 print(y_train)
 
 print(y_test)
+
+print("Jumlah Label Train ", x_test.value_counts())
+print("Jumlah Label Test", y_test.value_counts())
 
 # Membuat DataFrame Data Training
 df_train = pd.DataFrame({
@@ -235,7 +239,7 @@ print(x_train[24])
 word_index = tokenizer.word_index
 
 #print(word_index)
-
+print("Jumlah Kata = ")
 print(len(word_index))
 
 """## Model Word2Vec 50 Dimension"""
@@ -275,24 +279,24 @@ print(embedding_matrix.shape[0])
 
 """### Cek vektor kata dan yang berdekatan"""
 
-from sklearn.metrics.pairwise import cosine_similarity
-
-# Mencari vektor kata "saya"
-vector_saya = embeddings_dictionary.get("saya")
-
-# Mencari kata-kata berdekatan berdasarkan cosine similarity
-similar_words = {}
-for word, vector in embeddings_dictionary.items():
-    similarity = cosine_similarity([vector_saya], [vector])[0][0]
-    similar_words[word] = similarity
-
-# Mengurutkan kata-kata berdasarkan similarity (dalam urutan menurun)
-similar_words = sorted(similar_words.items(), key=lambda x: x[1], reverse=True)
-
-# Menampilkan hasil
-print("Kata-kata berdekatan dengan 'saya':")
-for word, similarity in similar_words[:10]:  # Ambil 10 kata teratas
-    print(f"{word}: {similarity}")
+# from sklearn.metrics.pairwise import cosine_similarity
+#
+# # Mencari vektor kata "saya"
+# vector_saya = embeddings_dictionary.get("saya")
+#
+# # Mencari kata-kata berdekatan berdasarkan cosine similarity
+# similar_words = {}
+# for word, vector in embeddings_dictionary.items():
+#     similarity = cosine_similarity([vector_saya], [vector])[0][0]
+#     similar_words[word] = similarity
+#
+# # Mengurutkan kata-kata berdasarkan similarity (dalam urutan menurun)
+# similar_words = sorted(similar_words.items(), key=lambda x: x[1], reverse=True)
+#
+# # Menampilkan hasil
+# print("Kata-kata berdekatan dengan 'saya':")
+# for word, similarity in similar_words[:10]:  # Ambil 10 kata teratas
+#     print(f"{word}: {similarity}")
 
 """## Build Model with Word2Vec
 
@@ -345,7 +349,7 @@ def build_and_train_model(epochs, embed_size, hidden_layer_size, batch_size, lea
     history = model.fit(x_train, y_train, batch_size=batch_size, validation_data=(X_test, y_test), epochs=epochs)
 
     return history,model
-
+"""
 # Contoh pemanggilan fungsi:
 #epochs = 5
 #embed_size = 50
@@ -376,9 +380,8 @@ predictions = predict_sentences(input_sentences, model, tokenizer, maxlen)
 for sentence, prediction in zip(input_sentences, predictions):
     print(f"Sentence: {sentence}\nPrediction: {'Hoax' if prediction[0] == 1 else 'Real'}\n")
 
-"""### Model 2"""
 
-"""### Model 2
+### Model 2
 
 *   **Epoch** : 5
 *   **Dimension Embedding** : 100
@@ -386,8 +389,6 @@ for sentence, prediction in zip(input_sentences, predictions):
 *   **Batch Size**    : 64
 *   **Optimizer**     : Adam
 *   **Learning Rate**  : 0.001
-
-"""
 
 #epochs = 5
 #embed_size = 50
@@ -413,9 +414,13 @@ evaluate_and_visualize(model2, x_train, y_train, X_test, y_test)
 predictions = predict_sentences(input_sentences, model2, tokenizer, maxlen)
 
 for sentence, prediction in zip(input_sentences, predictions):
-    print(f"Sentence: {sentence}\nPrediction: {'Hoax' if prediction[0] == 1 else 'Real'}\n")
+    print(f"Sentence: {sentence}\nPrediction: {'Hoax' if prediction[0] == 1 else 'Real'}\n")"""
 
-"""### Model 3"""
+### Model 3
+
+# Example usage
+input_sentences = ["anies meninggal dunia", "jokowi minta maaf kepada pki","gede pasek doakan ahy menjadi capres","CAK NUN SEBUT JOKOWI SEPERTI FIR’AUN KARENA DISURUH",
+                   "Beban Utang Prabowo Subianto 7,6 Triliun"]
 
 #epochs = 5
 #embed_size = 50
@@ -439,12 +444,12 @@ evaluate_and_visualize(model3, x_train, y_train, X_test, y_test)
 
 # Example usage
 
-predictions = predict_sentences(input_sentences, model3, tokenizer, maxlen)
-
-for sentence, prediction in zip(input_sentences, predictions):
-    print(f"Sentence: {sentence}\nPrediction: {'Hoax' if prediction[0] == 1 else 'Real'}\n")
-
-"""### Model 4"""
+# predictions = predict_sentences(input_sentences, model3, tokenizer, maxlen)
+#
+# for sentence, prediction in zip(input_sentences, predictions):
+#     print(f"Sentence: {sentence}\nPrediction: {'Hoax' if prediction[0] == 1 else 'Real'}\n")
+"""
+### Model 4
 
 #epochs = 5
 #embed_size = 50
@@ -473,7 +478,7 @@ predictions = predict_sentences(input_sentences, model4, tokenizer, maxlen)
 for sentence, prediction in zip(input_sentences, predictions):
     print(f"Sentence: {sentence}\nPrediction: {'Hoax' if prediction[0] == 1 else 'Real'}\n")
 
-"""### Model 5"""
+### Model 5
 
 epochs = 5
 #embed_size = 50
@@ -502,7 +507,7 @@ predictions = predict_sentences(input_sentences, model5, tokenizer, maxlen)
 for sentence, prediction in zip(input_sentences, predictions):
     print(f"Sentence: {sentence}\nPrediction: {'Hoax' if prediction[0] == 1 else 'Real'}\n")
 
-"""### Model 6"""
+### Model 6
 
 #epochs = 5
 #embed_size = 50
@@ -530,30 +535,79 @@ predictions = predict_sentences(input_sentences, model6, tokenizer, maxlen)
 
 for sentence, prediction in zip(input_sentences, predictions):
     print(f"Sentence: {sentence}\nPrediction: {'Hoax' if prediction[0] == 1 else 'Real'}\n")
+"""
 
 ## TEST KODE LABEL PREDICT == REAL
+def evaluate_confusion_matrix_class(true_label, predicted_label):
+    if true_label == 0 and predicted_label == 0:
+        return "True Positive"
+    elif true_label == 1 and predicted_label == 0:
+        return "False Positive"
+    elif true_label == 1 and predicted_label == 1:
+        return "True Negative"
+    elif true_label == 0 and predicted_label == 1:
+        return "False Negative"
+
 # Misalnya, sentences adalah kolom 'text' pada DataFrame
 sentences = df_result['Text']
 
-max_len =30
-
+max_len = 30
 # Memanggil fungsi predict_sentences untuk memperoleh prediksi biner
 binary_predictions = predict_sentences(sentences, model3, tokenizer, max_len)
 
 # Menambahkan kolom 'predicted_label' ke DataFrame
 df_result['predicted_label'] = binary_predictions
 
-# Menambahkan kolom 'is_correct' yang berisi label true jika 'predicted_label' sama dengan 'true_label'
-df_result['is_correct'] = df_result['predicted_label'] == df_result['True_Label']
+# Menambahkan kolom fungsi dengan "True Positive" jika predicted_label = true_label == real
+# "False Positive" jika true_label = hoax tapi predicted_label=real
+# "True Negative" jika predicted_label = true_label == hoax
+# "False Negative" jika true_label = real tetapi predicted_label=hoax
+df_result['confusion_matrix_class'] = df_result.apply(lambda row: evaluate_confusion_matrix_class(row['True_Label'], row['predicted_label']), axis=1)
 
 print(df_result)
 
 # Menghitung jumlah label true dan false dari kolom 'is_correct'
-label_counts = df_result['is_correct'].value_counts()
+label_counts = df_result['confusion_matrix_class'].value_counts()
 
 # Menampilkan hasil
-print("Jumlah label True:", label_counts[True])
-print("Jumlah label False:", label_counts[False])
+print(label_counts)
+
+
+# Misalnya, sentences adalah kolom 'text' pada DataFrame
+# sentences = df_result['Text']
+#
+# max_len =30
+#
+# # Memanggil fungsi predict_sentences untuk memperoleh prediksi biner
+# binary_predictions = predict_sentences(sentences, model3, tokenizer, max_len)
+#
+# # Menambahkan kolom 'predicted_label' ke DataFrame
+# df_result['predicted_label'] = binary_predictions
+#
+# # Menambahkan kolom 'is_correct' yang berisi label true jika 'predicted_label' sama dengan 'true_label'
+# df_result['is_correct'] = df_result['predicted_label'] == df_result['True_Label']
+#
+# print(df_result)
+#
+# # Menghitung jumlah label true dan false dari kolom 'is_correct'
+# label_counts = df_result['is_correct'].value_counts()
+#
+# # Menampilkan hasil
+# print("Jumlah label True:", label_counts[True])
+# print("Jumlah label False:", label_counts[False])
+#
+# # Menampilkan data di mana label asli adalah 0 tetapi diprediksi 1
+# false_negative = df_result[(df_result['True_Label'] == 0) & (df_result['predicted_label'] == 1)]
+#
+# # Menampilkan data di mana label asli adalah 1 tetapi diprediksi 0
+# false_positive = df_result[(df_result['True_Label'] == 1) & (df_result['predicted_label'] == 0)]
+#
+# # Menampilkan hasil
+# print("Data False Positive:")
+# print(len(false_positive))
+#
+# print("\nData False Negative:")
+# print(len(false_negative))
 
 # Menyimpan DataFrame yang sudah diperbarui
 df_result.to_csv('df_result_model3.csv', index=False)  # Gantilah dengan nama file dan path yang sesuai
@@ -561,7 +615,7 @@ df_result.to_csv('df_result_model3.csv', index=False)  # Gantilah dengan nama fi
 from keras.models import load_model
 
 model_load = load_model('model_lstm3.h5')
-model.summary()
+model_load.summary()
 
 # Example usage
 input_sentences = ["foto selebaran waspada penculikan anak anak berumur polda metro jaya",
